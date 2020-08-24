@@ -2,6 +2,7 @@ package com.cactusbiceps.doggies;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -176,6 +177,14 @@ public class MainActivity extends AppCompatActivity {
             Uri video = Uri.parse(url);
             videoView.setMediaController(mediaController);
             videoView.setVideoURI(video);
+
+            videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mp.setLooping(true);
+                }
+            });
+
             videoView.start();
         } catch (Exception e) {
             Log.e("Playing Video", e.getMessage());
